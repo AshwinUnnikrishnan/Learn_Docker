@@ -16,3 +16,21 @@ Read the complete post: https://medium.com/@moez_62905/deploy-machine-learning-m
 - YouTube : https://www.youtube.com/channel/UCxA1YTYJ9BEeo50lxyI_B3g 
 
 - PyCaret's Repository : https://www.github.com/pycaret/pycaret
+
+#### Steps
+1. Clone Repo of the project.
+2. Build the Docker Image
+   - docker build -t gcr.io/${PROJECT_ID}/{name}:{version} .
+3. Upload Container
+   - gcloud auth configure-docker
+   - docker push gcr.io/${PROJECT_ID}/{name}:{version}
+4. Create Cluster
+   - gcloud config set project $PROJECT_ID 
+   - gcloud config set compute/zone {zone}
+   - gcloud container clusters create {cluster_name} --num-nodes=1
+5. Deploy Application
+   - kubectl create deployment insurance-app --image=gcr.io/${PROJECT_ID}/insurance-app:v1
+5. Expose Application to the Internet
+   - kubectl expose deployment insurance-app --type=LoadBalancer --port 80 --target-port 8080
+7. Check Service
+   - kubectl get service
