@@ -1,0 +1,7 @@
+version: '3.0'
+services:
+  web:
+    image: histravelstories/insurance
+    build: .
+    ports:
+      - "8000:8080"

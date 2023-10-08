@@ -4,6 +4,6 @@ services:
     image: histravelstories/clickcounter
     build: .
     ports:
-      - "8000:4000"
+      - "8000:7000"
   redis:
     image: redis
